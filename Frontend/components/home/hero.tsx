@@ -13,11 +13,7 @@ const skills = [" Next.js", " React.js", " TypeScript", " Tailwind CSS", " UI/UX
 
 export function Hero() {
   const [currentSkillIndex, setCurrentSkillIndex] = useState(0);
-  // Using a ref to store the latest mouse position without triggering re-renders
-  const latestMousePosition = useRef({ x: 0, y: 0 });
   const heroRef = useRef<HTMLDivElement>(null);
-  // Ref for the specific element that creates the cursor shadow effect
-  const cursorShadowRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
 
   // Check if device is mobile for responsive adaptations
@@ -42,46 +38,6 @@ export function Hero() {
     return () => clearInterval(interval);
   }, []);
 
-  // Optimized mouse move effect using requestAnimationFrame
-  useEffect(() => {
-    // Only apply the effect on non-mobile devices
-    if (isMobile) return;
-
-    let animationFrameId: number;
-
-    // Function to update the cursor shadow's position, called by requestAnimationFrame
-    const updateCursorShadow = () => {
-      if (cursorShadowRef.current && heroRef.current) {
-        // Get the bounding rectangle of the hero section
-        const rect = heroRef.current.getBoundingClientRect();
-        // Calculate mouse position relative to the hero section
-        const x = latestMousePosition.current.x - rect.left;
-        const y = latestMousePosition.current.y - rect.top;
-
-        // Apply transform for smoother animation.
-        // We combine the mouse position translation with the centering translation.
-        cursorShadowRef.current.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
-      }
-      // Request the next animation frame
-      animationFrameId = requestAnimationFrame(updateCursorShadow);
-    };
-
-    // Event handler for mouse movement
-    const handleMouseMove = (e: MouseEvent) => {
-      // Store the global mouse position in the ref, don't update state directly
-      latestMousePosition.current = { x: e.clientX, y: e.clientY };
-    };
-
-    // Add event listener and start the animation loop
-    window.addEventListener('mousemove', handleMouseMove);
-    animationFrameId = requestAnimationFrame(updateCursorShadow);
-
-    // Cleanup function for when the component unmounts
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      cancelAnimationFrame(animationFrameId); // Cancel the animation frame to prevent memory leaks
-    };
-  }, [isMobile]); // Re-run effect if isMobile changes
 
   interface IconConfig {
     Icon: ElementType;
@@ -106,12 +62,10 @@ export function Hero() {
             <div className="absolute inset-2 rounded-full border-[1px] border-slate-300 dark:border-primary/30"></div>
             <div className="absolute inset-4 rounded-full border-[1px] border-slate-400 dark:border-primary/40"></div>
             <div className="absolute inset-8 rounded-full border-[1px] border-slate-300 dark:border-primary/20"></div>
-            {/* Glowing point on the semi-circle */}
-            <div className="absolute top-1/2 left-0 -translate-y-1/2 w-6 h-6 rounded-full bg-blue-500 dark:bg-primary shadow-[0_0_20px_8px_rgba(59,130,246,0.5)] dark:shadow-[0_0_30px_10px_rgba(56,189,248,0.4)]"></div>
           </div>
         </div>
 
-        {/* Refined grid pattern */}
+        {/* grid pattern */}
         <div className="absolute inset-0 w-full h-full -z-10 opacity-50">
           <Squares 
             speed={0.3} 
@@ -123,7 +77,184 @@ export function Hero() {
         </div>
 
         <div className="container-custom relative z-10">
-          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
+          {/* Mobile Layout */}
+            <div className="flex flex-col md:hidden items-center gap-6">
+              {/* Mobile availability badge */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="mb-2 inline-flex items-center gap-2 rounded-full bg-blue-50 dark:bg-primary/5 border border-blue-200 dark:border-primary/10 px-3 py-1 backdrop-blur-sm"
+              >
+                <span className="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+                <span className="text-xs font-medium">Available for projects</span>
+              </motion.div>
+
+              {/* Mobile heading - bigger */}
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="text-4xl sm:text-5xl font-bold text-center leading-tight tracking-tight mb-4"
+                style={{ fontFamily: '"Merriweather Sans", sans-serif' }}
+              >
+                Creating amazing
+                <span className="relative block mt-1 mb-2">
+                  <span className="relative z-10 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-primary dark:to-purple-500 bg-clip-text text-transparent">
+                    digital experiences
+                  </span>
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 z-0 h-2 w-3/4 bg-blue-100 dark:bg-primary/10 rounded"></span>
+                </span>
+                <span className="flex items-center justify-center flex-wrap">
+                  with
+                  <span className="relative ml-2 inline-block overflow-hidden">
+                    <RotatingText
+                      texts={skills}
+                      mainClassName="px-2 bg-cyan-300 text-black overflow-hidden py-1 justify-center rounded-md text-4xl sm:text-5xl font-bold"
+                      style={{ fontFamily: '"Merriweather Sans", sans-serif' }}
+                      staggerFrom={"last"}
+                      initial={{ y: "100%" }}
+                      animate={{ y: 0 }}
+                      exit={{ y: "-120%" }}
+                      staggerDuration={0.025}
+                      splitLevelClassName="overflow-hidden pb-0.5"
+                      transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                      rotationInterval={2000}
+                    />
+                  </span>
+                </span>
+              </motion.h1>
+
+              {/* Mobile subtitle - one liner */}
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-base text-slate-600 dark:text-muted-foreground text-center mb-6 px-4"
+              >
+                Building fast, modern websites that drive results
+              </motion.p>
+
+              {/* Mobile code block - smaller and compact */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.7, delay: 0.3 }}
+                className="w-full max-w-xs mb-6"
+              >
+                <div className="relative">
+                  {/* Mobile backdrop glow - smaller */}
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-300/20 to-purple-300/20 dark:from-primary/15 dark:to-purple-500/15 rounded-lg blur-sm"></div>
+
+                  {/* Mobile terminal window - more compact */}
+                  <div className="relative rounded-md overflow-hidden border border-blue-200 dark:border-primary/20 bg-white/90 dark:bg-black/80 backdrop-blur-xl shadow-md">
+                    <div className="p-2">
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex space-x-1">
+                          <div className="h-1.5 w-1.5 rounded-full bg-red-500"></div>
+                          <div className="h-1.5 w-1.5 rounded-full bg-yellow-500"></div>
+                          <div className="h-1.5 w-1.5 rounded-full bg-green-500"></div>
+                        </div>
+                        <div className="text-xs text-slate-400 dark:text-muted-foreground">dev.profile</div>
+                      </div>
+
+                      <div className="font-mono text-xs bg-slate-50 dark:bg-black/40 text-slate-800 dark:text-primary-foreground p-2 rounded border border-slate-200 dark:border-white/5">
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ duration: 0.5, delay: 0.5 }}
+                        >
+                          <p className="mb-1 text-slate-500 dark:text-white/70">// Quick intro</p>
+                          <p>
+                            <span className="text-blue-700 dark:text-blue-400">const</span>{" "}
+                            <span className="text-green-700 dark:text-green-400">dev</span> = {"{"}
+                          </p>
+                          <motion.p
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.7 }}
+                            className="ml-2"
+                          >
+                            <span className="text-amber-700 dark:text-yellow-400">name</span>:{" "}
+                            <span className="text-orange-700 dark:text-orange-400">'Nitin'</span>,
+                          </motion.p>
+                          <motion.p
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.9 }}
+                            className="ml-2"
+                          >
+                            <span className="text-amber-700 dark:text-yellow-400">role</span>:{" "}
+                            <span className="text-orange-700 dark:text-orange-400">'Frontend Dev'</span>,
+                          </motion.p>
+                          <motion.p
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 1.1 }}
+                            className="ml-2"
+                          >
+                            <span className="text-amber-700 dark:text-yellow-400">skill</span>:{" "}
+                            <span className="relative flex items-center">
+                              <span className="text-orange-700 dark:text-orange-400">'</span>
+                              <AnimatedText
+                                text={skills[currentSkillIndex]}
+                                className="text-orange-700 dark:text-orange-400"
+                              />
+                              <span className="text-orange-700 dark:text-orange-400">'</span>
+                              <span className="ml-1 animate-pulse text-blue-600 dark:text-primary">|</span>
+                            </span>
+                          </motion.p>
+                          <motion.p
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 1.3 }}
+                            className="ml-2"
+                          >
+                            <span className="text-amber-700 dark:text-yellow-400">status</span>:{" "}
+                            <span className="text-purple-700 dark:text-purple-400">available</span>
+                          </motion.p>
+                          <p>{"}"}</p>
+                        </motion.div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Mobile floating elements - smaller */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1.5, duration: 0.5 }}
+                    className="absolute -bottom-1 -right-1 bg-white dark:bg-background rounded-sm p-1 shadow-sm border border-slate-200 dark:border-muted"
+                  >
+                    <div className="flex items-center gap-1">
+                      <div className="w-1 h-1 rounded-full bg-green-500 animate-pulse"></div>
+                      <span className="text-xs font-medium">Online</span>
+                    </div>
+                  </motion.div>
+                </div>
+              </motion.div>
+
+              {/* Mobile buttons - compact and centered */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="flex flex-row gap-3 justify-center"
+              >
+                <Button size="default" asChild className="bg-blue-600 dark:bg-primary dark:hover:bg-primary/90 shadow-lg shadow-blue-500/20 dark:shadow-primary/20 transition-all">
+                  <Link href="/portfolio" className="flex items-center justify-center">
+                    View work
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+                <Button variant="outline" size="default" asChild className="border-blue-200 dark:border-primary/20 hover:bg-blue-50 dark:hover:bg-primary/5">
+                  <Link href="/contact">Let's talk</Link>
+                </Button>
+              </motion.div>
+            </div>
+
+          {/* Desktop Layout */}
+          <div className="hidden md:flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
             {/* Left content */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
