@@ -127,7 +127,7 @@ const SimpleAvatar = React.memo(() => {
                 {/* Removed overflow-hidden from this div as well */}
                 <div className="relative z-20 w-full h-full rounded-2xl">
                     <TiltedCard
-                        imageSrc="nitin.webp"
+                        imageSrc="Nitin.webp"
                         altText="Nitin Sharma - Full Stack Developer"
                         captionText="Nitin Sharma - Full Stack Developer"
                         containerHeight="400px"
