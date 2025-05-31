@@ -15,7 +15,7 @@ const HeroSection: React.FC = () => {
 
     const handleWhatsAppContact = () => {
         // Add your WhatsApp contact logic here
-        window.open('https://wa.me/your-number', '_blank');
+        window.open('https://wa.me/9968358455', '_blank');
     };
 
     return (
