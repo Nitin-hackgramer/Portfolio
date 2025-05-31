@@ -85,7 +85,7 @@ export default function AboutPage() {
           <div className="w-64 h-64 rounded-full bg-gradient-to-r from-blue-600 to-blue-800 p-1">
         <div className="w-full h-full rounded-full bg-gradient-to-br from-slate-900 to-blue-950 flex items-center justify-center overflow-hidden">
         <img 
-          src="/nitin.webp" 
+          src="/Nitin.webp" 
           alt="Nitin Sharma" 
           className="w-full h-full rounded-full object-cover"
         />
