@@ -60,7 +60,7 @@ const SimpleAvatar = React.memo(() => {
             <div className="relative rounded-2xl"> 
                 <div className="relative z-20 w-full h-full rounded-2xl">
                     <TiltedCard
-                        imageSrc="nitin.webp"
+                        imageSrc="Nitin.webp"
                         altText="Nitin Sharma - Full Stack Developer"
                         captionText="Nitin Sharma - Full Stack Developer"
                         containerHeight="400px"
@@ -98,7 +98,7 @@ const MobileAvatar = React.memo(() => {
             <div className="relative rounded-2xl"> 
                 <div className="relative z-20 w-full h-full rounded-2xl">
                     <TiltedCard
-                        imageSrc="nitin.webp"
+                        imageSrc="Nitin.webp"
                         altText="Nitin Sharma - Full Stack Developer"
                         captionText="Nitin Sharma - Full Stack Developer"
                         containerHeight="280px"
@@ -524,7 +524,7 @@ const OptimizedHeroSection = () => {
                                 <div className="relative rounded-2xl"> 
                                     <div className="relative z-20 w-full h-full rounded-2xl">
                                         <TiltedCard
-                                            imageSrc="nitin.webp"
+                                            imageSrc="Nitin.webp"
                                             altText="Nitin Sharma - Full Stack Developer"
                                             captionText="Nitin Sharma - Full Stack Developer"
                                             containerHeight="280px"
