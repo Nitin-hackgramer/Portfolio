@@ -291,11 +291,10 @@ const OptimizedHeroSection = () => {
                                     />
                                 </motion.button>
                                 
-                                <a href="/Nitin-Resume.pdf" target="_blank" rel="noopener noreferrer">
-                                  <motion.button
+                                <motion.button
                                     whileHover={{
-                                      scale: 1.05,
-                                      backgroundColor: theme === 'dark'
+                                    scale: 1.05,
+                                    backgroundColor: theme === 'dark'
                                         ? "rgba(51, 65, 85, 0.8)"
                                         : "rgba(255, 255, 255, 0.95)"
                                     }}
@@ -307,11 +306,10 @@ const OptimizedHeroSection = () => {
                                     }`}
                                   >
                                     <span className="flex items-center justify-center gap-2">
-                                      <Play className="h-4 w-4 group-hover:scale-110 transition-transform" />
-                                      View Resume
-                                    </span>
-                                  </motion.button>
-                                </a>
+                                    <Play className="h-4 w-4 group-hover:scale-110 transition-transform" />
+                                    <Link href="/Nitin-Resume.pdf">View Resume</Link>
+                                  </span>
+                                </motion.button>
 
 
                             {/* Social links */}
