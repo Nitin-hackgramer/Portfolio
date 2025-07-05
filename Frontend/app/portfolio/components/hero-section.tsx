@@ -261,33 +261,36 @@ const OptimizedHeroSection = () => {
                                 transition={{ delay: 0.8, duration: 0.6 }}
                                 className="flex flex-col sm:flex-row gap-4"
                             >
-                                <motion.button
-                                    whileHover={{ 
-                                        scale: 1.05,
-                                        boxShadow: theme === 'dark' 
-                                            ? "0 20px 40px -10px rgba(59, 130, 246, 0.4)"
-                                            : "0 25px 50px -12px rgba(79, 70, 229, 0.5)"
-                                    }}
-                                    whileTap={{ scale: 0.95 }}
-                                    className={`group relative text-white px-8 py-4 rounded-2xl font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden ${
-                                        theme === 'dark' 
-                                            ? 'bg-gradient-to-r from-blue-500 to-purple-600' 
-                                            : 'bg-gradient-to-r from-blue-600 to-indigo-700 shadow-indigo-300/50'
-                                    }`}
-                                >
-                                    <span className="relative z-10 flex items-center justify-center gap-2">
-                                        Get in Touch
-                                        <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                                    </span>
-                                    <motion.div
-                                        className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
+                                <Link href="/contact">
+                                    <motion.button
+                                        
+                                        whileHover={{ 
+                                            scale: 1.05,
+                                            boxShadow: theme === 'dark' 
+                                                ? "0 20px 40px -10px rgba(59, 130, 246, 0.4)"
+                                                : "0 25px 50px -12px rgba(79, 70, 229, 0.5)"
+                                        }}
+                                        whileTap={{ scale: 0.95 }}
+                                        className={`group relative text-white px-8 py-4 rounded-2xl font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden ${
                                             theme === 'dark' 
-                                                ? 'bg-gradient-to-r from-purple-600 to-blue-500' 
-                                                : 'bg-gradient-to-r from-indigo-700 to-purple-700'
+                                                ? 'bg-gradient-to-r from-blue-500 to-purple-600' 
+                                                : 'bg-gradient-to-r from-blue-600 to-indigo-700 shadow-indigo-300/50'
                                         }`}
-                                        whileHover={{ scale: 1.1 }}
-                                    />
-                                </motion.button>
+                                    >
+                                        <span className="relative z-10 flex items-center justify-center gap-2">
+                                            Get in Touch
+                                            <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                                        </span>
+                                        <motion.div
+                                            className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
+                                                theme === 'dark' 
+                                                    ? 'bg-gradient-to-r from-purple-600 to-blue-500' 
+                                                    : 'bg-gradient-to-r from-indigo-700 to-purple-700'
+                                            }`}
+                                            whileHover={{ scale: 1.1 }}
+                                        />
+                                    </motion.button>
+                                </Link>
                                 
                                 <motion.button
                                     whileHover={{ 
