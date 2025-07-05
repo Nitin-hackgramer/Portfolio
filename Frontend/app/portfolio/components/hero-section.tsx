@@ -291,24 +291,28 @@ const OptimizedHeroSection = () => {
                                     />
                                 </motion.button>
                                 
-                                <motion.button
-                                    whileHover={{ 
-                                        scale: 1.05,
-                                        backgroundColor: theme === 'dark' ? "rgba(51, 65, 85, 0.8)" : "rgba(255, 255, 255, 0.95)"
+                                <a href="/Nitin-Resume.pdf" target="_blank" rel="noopener noreferrer">
+                                  <motion.button
+                                    whileHover={{
+                                      scale: 1.05,
+                                      backgroundColor: theme === 'dark'
+                                        ? "rgba(51, 65, 85, 0.8)"
+                                        : "rgba(255, 255, 255, 0.95)"
                                     }}
                                     whileTap={{ scale: 0.95 }}
                                     className={`group backdrop-blur-sm border px-8 py-4 rounded-2xl font-semibold transition-all duration-300 ${
-                                        theme === 'dark'
-                                            ? 'bg-slate-800/50 border-slate-700 text-slate-300 hover:text-white'
-                                            : 'bg-white/80 border-indigo-300 text-indigo-800 hover:text-indigo-900 shadow-lg shadow-indigo-200/40'
+                                      theme === 'dark'
+                                        ? 'bg-slate-800/50 border-slate-700 text-slate-300 hover:text-white'
+                                        : 'bg-white/80 border-indigo-300 text-indigo-800 hover:text-indigo-900 shadow-lg shadow-indigo-200/40'
                                     }`}
-                                >
+                                  >
                                     <span className="flex items-center justify-center gap-2">
-                                        <Play className="h-4 w-4 group-hover:scale-110 transition-transform" />
-                                        View Projects
+                                      <Play className="h-4 w-4 group-hover:scale-110 transition-transform" />
+                                      View Resume
                                     </span>
-                                </motion.button>
-                            </motion.div>
+                                  </motion.button>
+                                </a>
+
 
                             {/* Social links */}
                             <motion.div 
