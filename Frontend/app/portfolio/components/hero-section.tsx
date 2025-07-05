@@ -133,11 +133,6 @@ const MobileAvatar = React.memo(() => {
 // Main hero component
 const OptimizedHeroSection = () => {
     const { theme } = useTheme();
-    const [mounted, setMounted] = useState(false);
-
-    useEffect(() => {
-        setMounted(true);
-    }, []);
 
         return (
             <section className={`min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 overflow-hidden relative transition-colors duration-500 ${
@@ -310,7 +305,7 @@ const OptimizedHeroSection = () => {
                                     <Link href="/Nitin-Resume.pdf">View Resume</Link>
                                   </span>
                                 </motion.button>
-
+                            </motion.div>
 
                             {/* Social links */}
                             <motion.div 
